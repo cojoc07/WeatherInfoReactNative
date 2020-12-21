@@ -22,8 +22,10 @@ const TabScreens = () => {
   return (
     <NavigationContainer>
       <MyTabs.Navigator
+        shifting={true}
         tabBarOptions={{
           activeTintColor: Colors.accentColor,
+
           inactiveTintColor: "gray",
         }}
       >
@@ -41,6 +43,7 @@ const TabScreens = () => {
                   />
                 );
               },
+              tabBarColor: "#9ccc65",
             };
           }}
         />
@@ -54,6 +57,7 @@ const TabScreens = () => {
                   <Ionicons name="ios-heart" size={22} color={tabInfo.color} />
                 );
               },
+              tabBarColor: "#00acc1",
             };
           }}
         />
@@ -67,6 +71,7 @@ const TabScreens = () => {
                   <Ionicons name="ios-person" size={22} color={tabInfo.color} />
                 );
               },
+              tabBarColor: "#8d6e63",
             };
           }}
         />
