@@ -1,28 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Card from "../../components/Card";
 
 const Today = () => {
+  const getForecast = async () => {
+    let url = `https://api.darksky.net/forecast/***REMOVED***/44.20,27.32?exclude=hourly&lang=ro&units=si`;
+    let res = await fetch(url);
+    let data = await res.json();
+
+    setTemp(Math.floor(data.currently.temperature));
+    setFeelsLike(Math.floor(data.currently.apparentTemperature));
+    setSummary(data.currently.summary);
+  };
+
+  const [temp, setTemp] = useState(0);
+  const [feelsLike, setFeelsLike] = useState(0);
+  const [summary, setSummary] = useState("");
+
+  useEffect(() => {
+    try {
+      getForecast();
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   return (
     <SafeAreaView style={styles.screen}>
       <Card style={styles.card}>
         <View style={styles.cardColumn}>
           <Text style={styles.title}>ACUM</Text>
-          <Text>Ziua: 24</Text>
-          <Text>Noaptea: 17</Text>
+          <Text>Ziua: -° ↑</Text>
+          <Text>Noaptea: -° ↓</Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontSize: 48 }}>19</Text>
+            <Text style={{ fontSize: 48 }}>{temp}</Text>
             <Text style={{ fontSize: 20 }}> C</Text>
           </View>
 
-          <Text>Se simt ca 14 grade</Text>
+          <Text>Se simt ca {feelsLike} grade</Text>
         </View>
         <View style={styles.cardColumn}>
           <Image
             source={require("../../assets/images/cloudy.png")}
             style={styles.image}
           />
-          <Text>Innorat</Text>
+          <Text>{summary}</Text>
         </View>
       </Card>
       <Card style={styles.cardSmall}>
