@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Card from "../../components/Card";
 
 const Tomorrow = () => {
@@ -17,18 +17,11 @@ const Tomorrow = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <Card style={styles.card}>
-        <View style={styles.cardColumn}>
-          <Text style={styles.title}>ACUM</Text>
-          <Text>Ziua: -° ↑</Text>
-          <Text>Noaptea: -° ↓</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontSize: 48 }}>{temp}</Text>
-            <Text style={{ fontSize: 20 }}> C</Text>
-          </View>
-
-          <Text>Se simt ca {feelsLike} grade</Text>
+        <View style={styles.cardColumnLeft}>
+          <Text style={styles.heading}>Ziua: {max}° ↑</Text>
+          <Text style={styles.heading}>Noaptea: {min}° ↓</Text>
         </View>
-        <View style={styles.cardColumn}>
+        <View style={styles.cardColumnRight}>
           <Image
             source={require("../../assets/images/cloudy.png")}
             style={styles.image}
@@ -36,14 +29,29 @@ const Tomorrow = () => {
           <Text>{summary}</Text>
         </View>
       </Card>
+
       <Card style={styles.cardSmall}>
-        <Text style={{ ...styles.title, marginBottom: 5 }}>
-          SAPTAMANA ACEASTA
-        </Text>
-        <Text>
-          Ploaie usoara de azi pana duminica, cu posibile ploi in timpul noptii
-          si temperaturi ce urca pana la 18 grade sambata.
-        </Text>
+        {/*  <Text style={{ ...styles.title, marginBottom: 5 }}>DETALII</Text> */}
+        <View style={styles.cardColumnLeft}>
+          <Text>Presiune atmosferică</Text>
+          <Text>Umiditate</Text>
+          <Text>Șanse de precipitații</Text>
+          <Text>Tip de precipitații</Text>
+          <Text>Temperatura minimă resimțită</Text>
+          <Text>Temperatura maximă resimțită</Text>
+          <Text>Răsărit</Text>
+          <Text>Apus</Text>
+        </View>
+        <View style={styles.cardColumnRight}>
+          <Text>1019 hPa</Text>
+          <Text>76%</Text>
+          <Text>75%</Text>
+          <Text>Ploaie</Text>
+          <Text>3 C</Text>
+          <Text>8 C</Text>
+          <Text>06:35</Text>
+          <Text>20:30</Text>
+        </View>
       </Card>
     </SafeAreaView>
   );
@@ -62,12 +70,22 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 200,
   },
-  cardColumn: {
+  cardColumnLeft: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    width: "50%",
+    alignItems: "flex-start",
+
     margin: 15,
+    borderWidth: 1,
+    borderColor: "red",
+  },
+  cardColumnRight: {
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: "30%",
+    margin: 15,
+    borderWidth: 1,
+    borderColor: "green",
   },
   image: {
     width: "80%",
@@ -75,15 +93,19 @@ const styles = StyleSheet.create({
     resizeMode: "center",
   },
   cardSmall: {
+    flexDirection: "row",
     marginTop: 5,
     margin: 15,
     padding: 15,
     width: "95%",
-    height: 100,
+    height: 250,
   },
   title: {
     fontWeight: "bold",
     color: "#0d47a1",
+  },
+  heading: {
+    fontSize: 24,
   },
 });
 
