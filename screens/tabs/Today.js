@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Button,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Card from "../../components/Card";
+import { useSelector } from "react-redux";
 
 const Today = () => {
-  const getForecast = async () => {
-    let url = `https://api.darksky.net/forecast/***REMOVED***/44.20,27.32?exclude=hourly&lang=ro&units=si`;
-    let res = await fetch(url);
-    let data = await res.json();
+  const weatherData = useSelector((state) => state.forecast);
 
-    setTemp(Math.floor(data.currently.temperature));
-    setFeelsLike(Math.floor(data.currently.apparentTemperature));
-    setSummary(data.currently.summary);
-  };
+  useEffect(() => {
+    setTemp(Math.round(Number(weatherData.forecast.currently?.temperature)));
+    setFeelsLike(
+      Math.round(Number(weatherData.forecast.currently?.apparentTemperature))
+    );
+    setSummary(weatherData.forecast.currently?.summary);
+  }, [weatherData]);
 
   const [temp, setTemp] = useState(0);
   const [feelsLike, setFeelsLike] = useState(0);
   const [summary, setSummary] = useState("");
-
-  useEffect(() => {
-    try {
-      getForecast();
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -55,6 +56,13 @@ const Today = () => {
           Ploaie usoara de azi pana duminica, cu posibile ploi in timpul noptii
           si temperaturi ce urca pana la 18 grade sambata.
         </Text>
+        <Button
+          title="Check"
+          onPress={() =>
+            //Alert.alert("redux slice", weatherData)
+            console.log("REDUX: " + weatherData.forecast.currently.summary)
+          }
+        />
       </Card>
     </SafeAreaView>
   );
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 15,
     width: "95%",
-    height: 100,
+    height: 180,
   },
   title: {
     fontWeight: "bold",

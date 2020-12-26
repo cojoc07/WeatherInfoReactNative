@@ -1,18 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Card from "../../components/Card";
+import { useSelector } from "react-redux";
 
 const Tomorrow = () => {
+  const weatherData = useSelector((state) => state.forecast);
+
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
   const [summary, setSummary] = useState("");
   const [pres, setPres] = useState(0);
   const [hum, setHum] = useState(0);
-  const [rainChance, setRainChance] = useState("");
+  const [precChance, setPrecChance] = useState("");
+  const [precType, setPrecType] = useState("");
   const [apparentMin, setApparentMin] = useState(0);
   const [apparentMax, setApparentMax] = useState(0);
   const [sunrise, setSunrise] = useState("");
   const [sunset, setSunset] = useState("");
+
+  useEffect(() => {
+    setMin(
+      Math.round(Number(weatherData.forecast.daily.data[1].temperatureLow))
+    );
+    setMax(
+      Math.round(Number(weatherData.forecast.daily.data[1].temperatureHigh))
+    );
+    setSummary(weatherData.forecast.daily.data[1].summary);
+
+    setPres(Math.round(Number(weatherData.forecast.daily.data[1].pressure)));
+    setHum(Math.round(Number(weatherData.forecast.daily.data[1].humidity)));
+    setPrecChance(
+      Math.round(Number(weatherData.forecast.daily.data[1].precipProbability))
+    );
+    setPrecType(weatherData.forecast.daily.data[1].precipType);
+    setApparentMin(
+      Math.round(
+        Number(weatherData.forecast.daily.data[1].apparentTemperatureLow)
+      )
+    );
+    setApparentMax(
+      Math.round(
+        Number(weatherData.forecast.daily.data[1].apparentTemperatureHigh)
+      )
+    );
+    setSunrise(weatherData.forecast.daily.data[1].sunriseTime);
+    setSunset(weatherData.forecast.daily.data[1].sunsetTime);
+  }, [weatherData]);
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -43,14 +76,14 @@ const Tomorrow = () => {
           <Text>Apus</Text>
         </View>
         <View style={styles.cardColumnRight}>
-          <Text>1019 hPa</Text>
-          <Text>76%</Text>
-          <Text>75%</Text>
-          <Text>Ploaie</Text>
-          <Text>3 C</Text>
-          <Text>8 C</Text>
-          <Text>06:35</Text>
-          <Text>20:30</Text>
+          <Text>{pres}</Text>
+          <Text>{hum}</Text>
+          <Text>{precChance}</Text>
+          <Text>{precType}</Text>
+          <Text>{apparentMin}</Text>
+          <Text>{apparentMax}</Text>
+          <Text>{sunrise}</Text>
+          <Text>{sunset}</Text>
         </View>
       </Card>
     </SafeAreaView>
