@@ -4,7 +4,7 @@ export const fetchForecast = () => {
   return async (dispatch, getState) => {
     try {
       const response = await fetch(
-        `https://api.darksky.net/forecast/***REMOVED***/44.20,27.32?exclude=hourly&lang=ro&units=si`
+        `https://api.darksky.net/forecast/APIKEY/44.20,27.32?exclude=hourly&lang=ro&units=si`
       );
 
       if (!response.ok) {
