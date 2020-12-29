@@ -9,7 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+constants/keys.js
 # macOS
 .DS_Store
 .vscode/launch.json

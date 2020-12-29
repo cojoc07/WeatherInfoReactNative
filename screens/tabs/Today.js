@@ -4,11 +4,14 @@ import {
   Button,
   Image,
   SafeAreaView,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import Card from "../../components/Card";
+
 import { useSelector } from "react-redux";
 
 const Today = () => {
@@ -16,54 +19,62 @@ const Today = () => {
 
   useEffect(() => {
     setTemp(Math.round(Number(weatherData.forecast.currently?.temperature)));
+    setMin(
+      Math.round(Number(weatherData.forecast.daily?.data[0].temperatureLow))
+    );
+    setMax(
+      Math.round(Number(weatherData.forecast.daily?.data[0].temperatureHigh))
+    );
     setFeelsLike(
       Math.round(Number(weatherData.forecast.currently?.apparentTemperature))
     );
-    setSummary(weatherData.forecast.currently?.summary);
+    setSummary(weatherData.forecast.currently?.summary.toUpperCase());
+    setWeekSummary(weatherData.forecast.daily?.summary);
   }, [weatherData]);
 
   const [temp, setTemp] = useState(0);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
   const [feelsLike, setFeelsLike] = useState(0);
   const [summary, setSummary] = useState("");
+  const [weekSummary, setWeekSummary] = useState("");
 
   return (
     <SafeAreaView style={styles.screen}>
-      <Card style={styles.card}>
-        <View style={styles.cardColumn}>
-          <Text style={styles.title}>ACUM</Text>
-          <Text>Ziua: -° ↑</Text>
-          <Text>Noaptea: -° ↓</Text>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ fontSize: 48 }}>{temp}</Text>
-            <Text style={{ fontSize: 20 }}> C</Text>
-          </View>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView
+        keyboardShouldPersistTaps="never"
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Card style={styles.card}>
+          <View style={styles.cardColumn}>
+            <Text style={styles.title}>Acum</Text>
+            <Text>Ziua: {min}° ↑</Text>
+            <Text>Noaptea: {max}° ↓</Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={{ fontSize: 48 }}>{temp}</Text>
+              <Text style={{ fontSize: 20 }}> °C</Text>
+            </View>
 
-          <Text>Se simt ca {feelsLike} grade</Text>
-        </View>
-        <View style={styles.cardColumn}>
-          <Image
-            source={require("../../assets/images/cloudy.png")}
-            style={styles.image}
-          />
-          <Text>{summary}</Text>
-        </View>
-      </Card>
-      <Card style={styles.cardSmall}>
-        <Text style={{ ...styles.title, marginBottom: 5 }}>
-          SAPTAMANA ACEASTA
-        </Text>
-        <Text>
-          Ploaie usoara de azi pana duminica, cu posibile ploi in timpul noptii
-          si temperaturi ce urca pana la 18 grade sambata.
-        </Text>
-        <Button
-          title="Check"
-          onPress={() =>
-            //Alert.alert("redux slice", weatherData)
-            console.log("REDUX: " + weatherData.forecast.currently.summary)
-          }
-        />
-      </Card>
+            <Text>
+              Se simt ca {feelsLike} {feelsLike == 1 ? "grad" : "grade"}
+            </Text>
+          </View>
+          <View style={styles.cardColumn}>
+            <Image
+              source={require("../../assets/images/cloudy.png")}
+              style={styles.image}
+            />
+            <Text>{summary}</Text>
+          </View>
+        </Card>
+        <Card style={styles.cardSmall}>
+          <Text style={{ ...styles.title, marginBottom: 5 }}>
+            Săptămâna asta
+          </Text>
+          <Text>{weekSummary}</Text>
+        </Card>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: "row",
-    marginTop: 30,
+    marginTop: 70,
     margin: 15,
     width: "95%",
     height: 200,
@@ -98,10 +109,11 @@ const styles = StyleSheet.create({
     margin: 15,
     padding: 15,
     width: "95%",
-    height: 180,
   },
   title: {
+    fontFamily: "open-sans",
     fontWeight: "bold",
+    fontSize: 18,
     color: "#0d47a1",
   },
 });
