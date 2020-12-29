@@ -56,50 +56,49 @@ const Tomorrow = () => {
   }, [weatherData]);
 
   return (
-    <SafeAreaView style={styles.screen}>
-      <ScrollView
-        keyboardShouldPersistTaps="never"
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Card style={styles.card}>
-          <View style={styles.cardColumnLeft}>
-            <Text style={styles.heading}>Ziua: {max}° ↑</Text>
-            <Text style={styles.heading}>Noaptea: {min}° ↓</Text>
-          </View>
-          <View style={styles.cardColumnRight}>
-            <Image
-              source={require("../../assets/images/cloudy.png")}
-              style={styles.image}
-            />
-            <Text>{summary}</Text>
-          </View>
-        </Card>
+    <ScrollView
+      contentContainerStyle={styles.screen}
+      keyboardShouldPersistTaps="never"
+      style={{ width: "100%", height: "100%" }}
+    >
+      <Card style={styles.card}>
+        <View style={styles.cardColumnLeft}>
+          <Text style={styles.heading}>Ziua: {max}° ↑</Text>
+          <Text style={styles.heading}>Noaptea: {min}° ↓</Text>
+        </View>
+        <View style={styles.cardColumnRight}>
+          <Image
+            source={require("../../assets/images/cloudy.png")}
+            style={styles.image}
+          />
+          <Text>{summary}</Text>
+        </View>
+      </Card>
 
-        <Card style={styles.cardSmall}>
-          {/*  <Text style={{ ...styles.title, marginBottom: 5 }}>DETALII</Text> */}
-          <View style={styles.cardColumnLeftSmall}>
-            <Text>Presiune atmosferică</Text>
-            <Text>Umiditate</Text>
-            <Text>Șanse de precipitații</Text>
-            <Text>Tip de precipitații</Text>
-            <Text>Temperatura minimă resimțită</Text>
-            <Text>Temperatura maximă resimțită</Text>
-            <Text>Răsărit</Text>
-            <Text>Apus</Text>
-          </View>
-          <View style={styles.cardColumnRightSmall}>
-            <Text>{pres}</Text>
-            <Text>{hum}</Text>
-            <Text>{precChance}</Text>
-            <Text>{precType}</Text>
-            <Text>{apparentMin}</Text>
-            <Text>{apparentMax}</Text>
-            <Text>{moment.unix(sunrise).format("HH:mm").toString()}</Text>
-            <Text>{moment.unix(sunset).format("HH:mm").toString()}</Text>
-          </View>
-        </Card>
-      </ScrollView>
-    </SafeAreaView>
+      <Card style={styles.cardSmall}>
+        {/*  <Text style={{ ...styles.title, marginBottom: 5 }}>DETALII</Text> */}
+        <View style={styles.cardColumnLeftSmall}>
+          <Text>Presiune atmosferică</Text>
+          <Text>Umiditate</Text>
+          <Text>Șanse de precipitații</Text>
+          <Text>Tip de precipitații</Text>
+          <Text>Temperatura minimă resimțită</Text>
+          <Text>Temperatura maximă resimțită</Text>
+          <Text>Răsărit</Text>
+          <Text>Apus</Text>
+        </View>
+        <View style={styles.cardColumnRightSmall}>
+          <Text>{pres}</Text>
+          <Text>{hum}</Text>
+          <Text>{precChance}</Text>
+          <Text>{precType}</Text>
+          <Text>{apparentMin}</Text>
+          <Text>{apparentMax}</Text>
+          <Text>{moment.unix(sunrise).format("HH:mm").toString()}</Text>
+          <Text>{moment.unix(sunset).format("HH:mm").toString()}</Text>
+        </View>
+      </Card>
+    </ScrollView>
   );
 };
 

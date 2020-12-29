@@ -3,8 +3,10 @@ import AppScreens from "../navigation/Navigation";
 import {
   Alert,
   ActivityIndicator,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
+  Platform,
   View,
 } from "react-native";
 import * as forecastActions from "../store/actions/forecast";
@@ -35,18 +37,21 @@ const MainScreen = () => {
 
   if (isLoading) {
     return (
-      <View style={styles.centered}>
+      <SafeAreaView style={styles.centered}>
         <ActivityIndicator size="large" color={Colors.primaryColor} />
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={Platform.OS === "ios" ? { flex: 1, marginTop: 35 } : { flex: 1 }}
+    >
       <AppScreens />
       <View style={{ position: "absolute", top: 0, left: 0, width: "100%" }}>
         <PlacesInput
           googleApiKey={keys.PLACESKEY}
+          stylesInput={{ borderRadius: 15 }}
           queryCountries={["ro"]}
           onSelect={(place) => console.log(place)}
         />

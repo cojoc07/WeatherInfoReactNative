@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, ScrollView, StyleSheet, View } from "react-native";
 
 const SevenDays = () => {
   return (
-    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.screen}>
       <Text>7 zile</Text>
-    </View>
+    </ScrollView>
   );
 };
 
