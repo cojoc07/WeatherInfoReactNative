@@ -139,19 +139,18 @@ const Today = () => {
   const [feelsLike, setFeelsLike] = useState(0);
   const [summary, setSummary] = useState("");
   const [weekSummary, setWeekSummary] = useState("");
-  const [icon, setIcon] = useState("clear");
+  const [icon, setIcon] = useState(null);
 
   return (
     <ScrollView
       keyboardShouldPersistTaps="never"
       contentContainerStyle={styles.screen}
     >
-      <StatusBar barStyle="dark-content" />
       <Card style={styles.card}>
         <View style={styles.cardColumn}>
           <Text style={styles.title}>Acum</Text>
-          <Text>Ziua: {min}° ↑</Text>
-          <Text>Noaptea: {max}° ↓</Text>
+          <Text>Ziua: {max}° ↑</Text>
+          <Text>Noaptea: {min}° ↓</Text>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={{ fontSize: 48 }}>{temp}</Text>
             <Text style={{ fontSize: 20 }}> °C</Text>
@@ -183,7 +182,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     marginTop: 70,
-    margin: 15,
+
     width: "95%",
     height: 200,
   },
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
     resizeMode: "center",
   },
   cardSmall: {
-    marginTop: 5,
+    marginTop: 15,
     margin: 15,
     padding: 15,
     width: "95%",

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     marginTop: 70,
-    margin: 15,
+
     width: "95%",
     height: 200,
   },
@@ -121,24 +121,17 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
 
     margin: 15,
-    borderWidth: 1,
-    borderColor: "red",
   },
   cardColumnLeftSmall: {
     justifyContent: "space-around",
     alignItems: "flex-start",
-
     margin: 15,
-    borderWidth: 1,
-    borderColor: "red",
   },
   cardColumnRight: {
     justifyContent: "space-around",
     alignItems: "center",
     width: "35%",
     margin: 15,
-    borderWidth: 1,
-    borderColor: "green",
   },
   cardColumnRightSmall: {
     flex: 1,
@@ -146,8 +139,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     width: "35%",
     margin: 15,
-    borderWidth: 1,
-    borderColor: "green",
   },
   image: {
     width: "90%",
@@ -156,8 +147,8 @@ const styles = StyleSheet.create({
   },
   cardSmall: {
     flexDirection: "row",
-    marginTop: 5,
-    margin: 15,
+
+    marginTop: 15,
     padding: 15,
     width: "95%",
     height: 250,
