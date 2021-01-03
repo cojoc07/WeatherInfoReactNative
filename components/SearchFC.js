@@ -10,16 +10,30 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import _ from "lodash";
 
-import { useSelector } from "react-redux";
+import * as forecastActions from "../store/actions/forecast";
+import { useDispatch, useSelector } from "react-redux";
 
 const PlacesInput = (props) => {
   const [query, setQuery] = useState("");
   const [places, setPlaces] = useState([]);
   const [showList, setShowList] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const location = useSelector((state) => state.location);
+
+  const dispatch = useDispatch();
+
+  //cand se schimba locatia din state
+  useEffect(() => {
+    if (location.location.length > 5) {
+      console.log("Location changed: " + location.location);
+      setQuery(location.location);
+    }
+  }, [location]);
 
   //componentDidMount
   useEffect(() => {
@@ -72,6 +86,16 @@ const PlacesInput = (props) => {
     return "";
   };
 
+  const tryLoad = async (lat, lon) => {
+    setIsLoading(true);
+    try {
+      await dispatch(forecastActions.fetchForecast(lat, lon));
+    } catch (err) {
+      Alert.alert("Eroare", err.message);
+    }
+    setIsLoading(false);
+  };
+
   const fetchPlaces = async (query) => {
     if (!query || query.length < props.requiredCharactersBeforeSearch) {
       return;
@@ -96,7 +120,7 @@ const PlacesInput = (props) => {
   debouncedFunctionRef.current = (field, payload) => fetchPlaces(field);
 
   const debouncedChange = useCallback(
-    _.debounce((...args) => debouncedFunctionRef.current(...args), 1500),
+    _.debounce((...args) => debouncedFunctionRef.current(...args), 1000),
     []
   );
 
@@ -104,7 +128,7 @@ const PlacesInput = (props) => {
     const { clearQueryOnSelect } = props;
 
     setIsLoading(true);
-
+    console.log("entering onPlaceSelect");
     try {
       const place = await fetch(
         `https://maps.googleapis.com/maps/api/place/details/json?placeid=${id}&key=${
@@ -123,8 +147,15 @@ const PlacesInput = (props) => {
               place.result &&
               (place.result.formatted_address || place.result.name)
       );
+
+      tryLoad(
+        place.result.geometry.location.lat,
+        place.result.geometry.location.lng
+      );
+
       Keyboard.dismiss();
     } catch (e) {
+      console.log("entering catch" + e.message);
       setShowList(false);
       setIsLoading(false);
       setQuery(passedPlace.description);
@@ -193,6 +224,7 @@ const PlacesInput = (props) => {
           </View>
         )}
       </View>
+
       <TouchableOpacity
         style={{
           flex: 1,

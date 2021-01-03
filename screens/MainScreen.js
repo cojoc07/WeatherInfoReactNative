@@ -17,36 +17,27 @@ import { Ionicons } from "@expo/vector-icons";
 import * as forecastActions from "../store/actions/forecast";
 import * as locationActions from "../store/actions/location";
 import * as keys from "../constants/keys";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Colors from "../constants/Colors";
 
 import { FloatingAction } from "react-native-floating-action";
 import * as Location from "expo-location";
 
-//import PlacesInput from "../components/Search";
 import PlacesInput from "../components/SearchFC";
 
 const MainScreen = () => {
   const dispatch = useDispatch();
-  const location = useSelector((state) => state.location);
   const STATUS_BAR = StatusBar.statusBarHeight || 24;
   const [isLoading, setIsLoading] = useState(false);
   const [lat, setLat] = useState(44.43);
   const [lon, setLon] = useState(26.09);
-  const [query, setQuery] = useState("");
-  const [locationVisible, setLocationVisible] = useState(false);
+
   const actions = [
     {
       text: "Locate me",
       icon: <Ionicons name="ios-location" size={22} color={"white"} />,
       name: "bt_locate",
       position: 2,
-    },
-    {
-      text: "TEST",
-      icon: <Ionicons name="ios-person" size={22} color={"white"} />,
-      name: "bt_test",
-      position: 3,
     },
   ];
 
@@ -70,7 +61,7 @@ const MainScreen = () => {
       );
       const resData = await response.json();
       var locationAddress = resData.results[0].formatted_address;
-      console.log("Adresa este " + locationAddress);
+
       dispatch(locationActions.setLocation(locationAddress));
     } catch (err) {
       Alert.alert("Eroare", err.message);
@@ -137,31 +128,7 @@ const MainScreen = () => {
           }}
           placeHolder={"Caută"}
           queryCountries={["ro"]}
-          onSelect={(place) => {
-            console.log(place);
-            setLat(place.result.geometry.location.lat);
-            setLon(place.result.geometry.location.lng);
-            Keyboard.dismiss();
-          }}
         />
-        {/*   {locationVisible ? (
-          <TextInput
-            style={{
-              top: 10,
-              left: 10,
-              height: 50,
-              width: "85%",
-              borderRadius: 15,
-              backgroundColor: "#fff",
-              paddingHorizontal: 15,
-              borderWidth: 1,
-              borderColor: "red",
-            }}
-            value={query}
-          />
-        ) : (
-          <View></View>
-        )} */}
       </View>
 
       <FloatingAction
@@ -169,12 +136,9 @@ const MainScreen = () => {
         distanceToEdge={{ vertical: 80, horizontal: 30 }}
         onPressItem={(name) => {
           switch (name) {
-            case "bt_test": {
-              //setQuery(location.location);
-              return;
-            }
             case "bt_locate": {
               getLocation();
+              tryLoad();
               return;
             }
             default: {
