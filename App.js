@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import MainScreen from "./screens/MainScreen";
 import * as Font from "expo-font";
 import forecastReducer from "./store/reducers/forecast";
+import locationReducer from "./store/reducers/location";
+
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import ReduxThunk from "redux-thunk";
 import { Provider } from "react-redux";
@@ -10,6 +12,7 @@ import AppLoading from "expo-app-loading";
 
 const rootReducer = combineReducers({
   forecast: forecastReducer,
+  location: locationReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
