@@ -40,7 +40,11 @@ const Tomorrow = () => {
     setPrecChance(
       Math.round(Number(weatherData.forecast.daily?.data[1]?.precipProbability))
     );
-    setPrecType(weatherData.forecast.daily?.data[1]?.precipType);
+    setPrecType(
+      weatherData.forecast.daily?.data[1]?.precipType == "snow"
+        ? "Ninsoare"
+        : "Ploaie"
+    );
     setApparentMin(
       Math.round(
         Number(weatherData.forecast.daily?.data[1]?.apparentTemperatureLow)
@@ -65,37 +69,47 @@ const Tomorrow = () => {
         <View style={styles.cardColumnLeft}>
           <Text style={styles.heading}>Ziua: {max}° ↑</Text>
           <Text style={styles.heading}>Noaptea: {min}° ↓</Text>
+          <Text style={{ marginTop: 15 }}>{summary}</Text>
         </View>
         <View style={styles.cardColumnRight}>
           <Image
             source={require("../../assets/images/cloudy.png")}
             style={styles.image}
           />
-          <Text>{summary}</Text>
         </View>
       </Card>
 
       <Card style={styles.cardSmall}>
-        {/*  <Text style={{ ...styles.title, marginBottom: 5 }}>DETALII</Text> */}
-        <View style={styles.cardColumnLeftSmall}>
-          <Text>Presiune atmosferică</Text>
-          <Text>Umiditate</Text>
-          <Text>Șanse de precipitații</Text>
-          <Text>Tip de precipitații</Text>
-          <Text>Temperatura minimă resimțită</Text>
-          <Text>Temperatura maximă resimțită</Text>
-          <Text>Răsărit</Text>
-          <Text>Apus</Text>
-        </View>
-        <View style={styles.cardColumnRightSmall}>
-          <Text>{pres}</Text>
-          <Text>{hum}</Text>
-          <Text>{precChance}</Text>
-          <Text>{precType}</Text>
-          <Text>{apparentMin}</Text>
-          <Text>{apparentMax}</Text>
-          <Text>{moment.unix(sunrise).format("HH:mm").toString()}</Text>
-          <Text>{moment.unix(sunset).format("HH:mm").toString()}</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={{ ...styles.title, marginBottom: 5 }}>DETALII</Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <View style={styles.cardColumnLeftSmall}>
+              <Text>Presiune atmosferică</Text>
+              <Text>Umiditate</Text>
+              <Text>Șanse de precipitații</Text>
+              <Text>Tip de precipitații</Text>
+              <Text>Temperatura minimă resimțită</Text>
+              <Text>Temperatura maximă resimțită</Text>
+              <Text>Răsărit</Text>
+              <Text>Apus</Text>
+            </View>
+            <View style={styles.cardColumnRightSmall}>
+              <Text>{pres}</Text>
+              <Text>{hum}</Text>
+              <Text>{precChance}</Text>
+              <Text>{precType}</Text>
+              <Text>{apparentMin}</Text>
+              <Text>{apparentMax}</Text>
+              <Text>{moment.unix(sunrise).format("HH:mm").toString()}</Text>
+              <Text>{moment.unix(sunset).format("HH:mm").toString()}</Text>
+            </View>
+          </View>
         </View>
       </Card>
     </ScrollView>
@@ -111,21 +125,20 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     marginTop: 70,
-
     width: "95%",
-    height: 200,
+    height: 150,
   },
   cardColumnLeft: {
     flex: 1,
     justifyContent: "center",
     alignItems: "flex-end",
-
     margin: 15,
   },
   cardColumnLeftSmall: {
     justifyContent: "space-around",
     alignItems: "flex-start",
-    margin: 15,
+    width: "65%",
+    margin: 0,
   },
   cardColumnRight: {
     justifyContent: "space-around",
@@ -134,11 +147,8 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   cardColumnRightSmall: {
-    flex: 1,
     justifyContent: "space-around",
     alignItems: "flex-start",
-    width: "35%",
-    margin: 15,
   },
   image: {
     width: "90%",
@@ -158,7 +168,7 @@ const styles = StyleSheet.create({
     color: "#0d47a1",
   },
   heading: {
-    fontSize: 28,
+    fontSize: 24,
   },
 });
 

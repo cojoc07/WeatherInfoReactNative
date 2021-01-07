@@ -187,10 +187,12 @@ const PlacesInput = (props) => {
             keyboardShouldPersistTaps="always"
           >
             {props.contentScrollViewTop}
-            {isLoading && (
+
+            {isLoading ? (
               <View
                 style={{
                   position: "absolute",
+
                   top: 0,
                   left: 0,
                   right: 0,
@@ -201,10 +203,14 @@ const PlacesInput = (props) => {
               >
                 <ActivityIndicator
                   size="small"
+                  color="green"
                   style={[styles.loading, props.stylesLoading]}
                 />
               </View>
+            ) : (
+              <View></View>
             )}
+
             {places.map((place) => {
               return (
                 <TouchableOpacity

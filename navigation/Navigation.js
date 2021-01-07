@@ -36,11 +36,7 @@ const TabScreens = () => {
             return {
               tabBarIcon: (tabInfo) => {
                 return (
-                  <Ionicons
-                    name="ios-restaurant"
-                    size={22}
-                    color={tabInfo.color}
-                  />
+                  <Ionicons name="ios-today" size={22} color={tabInfo.color} />
                 );
               },
               tabBarColor: "#9ccc65",
@@ -54,7 +50,11 @@ const TabScreens = () => {
             return {
               tabBarIcon: (tabInfo) => {
                 return (
-                  <Ionicons name="ios-heart" size={22} color={tabInfo.color} />
+                  <Ionicons
+                    name="ios-calendar"
+                    size={22}
+                    color={tabInfo.color}
+                  />
                 );
               },
               tabBarColor: "#00acc1",
