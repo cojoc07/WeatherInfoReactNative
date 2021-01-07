@@ -34,7 +34,7 @@
 ## About The Project
 
 Weather application for Android and iOS built with React Native.
-Project goal: refactoring my old weather app (Android - Java) using React Native and Flutter. 
+Project goal: refactoring my old weather app (Android - Java) into 2 new apps built with React Native and Flutter. 
 
 <img src="process.png" alt="Logo" height="360">
 
