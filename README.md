@@ -43,8 +43,6 @@ See the Flutter version here: https://github.com/cojoc07/WeatherInfoFlutter
 The app can use the device location for retrieving weather information or can use the built-in Google Places search widget to select another location.
 
 
-<img src="app.png" alt="Logo" height="660">
-
 ### Built With
 
 The app was built with React Native, using the Expo framework. .
