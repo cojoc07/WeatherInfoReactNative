@@ -28,15 +28,13 @@
   </ol>
 </details>
 
-
+<img src="rn_screens.png" alt="screenshots" height="600" width="869">
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 Weather application for Android and iOS built with React Native.
 Project goal: refactoring my old weather app (Android - Java) into 2 new apps built with React Native and Flutter. 
-
-<img src="process.png" alt="Logo" height="360">
 
 See the Flutter version here: https://github.com/cojoc07/WeatherInfoFlutter
 
