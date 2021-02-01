@@ -35,7 +35,13 @@ const MainScreen = () => {
   const actions = [
     {
       text: "Locate me",
-      icon: <Ionicons name="ios-location" size={22} color={"white"} />,
+      icon: (
+        <Ionicons
+          name={Platform.OS === "ios" ? "ios-location" : "md-location"}
+          size={22}
+          color={"white"}
+        />
+      ),
       name: "bt_locate",
       position: 2,
     },
@@ -133,7 +139,14 @@ const MainScreen = () => {
 
       <FloatingAction
         actions={actions}
-        distanceToEdge={{ vertical: 80, horizontal: 30 }}
+        floatingIcon={
+          <Ionicons
+            name={Platform.OS == "ios" ? "ios-location" : "md-location"}
+            size={22}
+            color={"white"}
+          />
+        }
+        distanceToEdge={{ vertical: 70, horizontal: 30 }}
         onPressItem={(name) => {
           switch (name) {
             case "bt_locate": {
