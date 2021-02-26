@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="logo-rn.png" alt="Logo" width="160" height="160">
+    <img src="logo-rn.png" alt="Logo" width="50%">
   </a>
 
   <h3 align="center">React Native Weather Info </h3>
@@ -28,7 +28,7 @@
   </ol>
 </details>
 
-<img src="rn_screens.png" alt="screenshots" height="600" width="869">
+<img src="rn_screens.png" alt="screenshots" width="100%">
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -36,7 +36,7 @@
 Weather application for Android and iOS built with React Native.
 Project goal: refactoring my old weather app (Android - Java) into 2 new apps built with React Native and Flutter. 
 
-See the Flutter version here: https://github.com/cojoc07/WeatherInfoFlutter
+See the Flutter version here: https://github.com/stcojo/WeatherInfoFlutter
 
 The app can use the device location for retrieving weather information or can use the built-in Google Places search widget to select another location.
 
@@ -88,7 +88,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Stefan Cojocaru - cojoc07@gmail.com
 
-Project Link: [Weather Info React Native](https://github.com/cojoc07/WeatherInfoReactNative)
+Project Link: [Weather Info React Native](https://github.com/stcojo/WeatherInfoReactNative)
 
 
 [![MIT License][license-shield]][license-url]
