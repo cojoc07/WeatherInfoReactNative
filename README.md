@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="logo-rn.png" alt="Logo" width="50%">
+    <img src="logo-rn.png" alt="Logo" width="30%">
   </a>
 
   <h3 align="center">React Native Weather Info </h3>
@@ -86,7 +86,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Stefan Cojocaru - cojoc07@gmail.com
+Stefan Cojocaru - stefan.cojocaru@microsoft.com
 
 Project Link: [Weather Info React Native](https://github.com/stcojo/WeatherInfoReactNative)
 
